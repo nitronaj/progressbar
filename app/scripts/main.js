@@ -4,7 +4,7 @@ var ProgressBarModule = (function () {
     var $opt = {};
     var $defaultOpt = {
         warningBottom: 80,
-        warningTop: 95
+        warningTop: 100
     }
 
     var setProgressBar= function($elem){
@@ -35,9 +35,9 @@ var ProgressBarModule = (function () {
     }
 
     var checkStatus = function($newValue){
-        if($newValue < $opt.warningBottom){
+        if($newValue <= $opt.warningBottom){
             setProgressBarStatus('normal');
-        }else if($newValue >= $opt.warningBottom && $newValue < $opt.warningTop){
+        }else if($newValue > $opt.warningBottom && $newValue <= $opt.warningTop){
             setProgressBarStatus('warning');
 
         }else{
@@ -64,8 +64,9 @@ var ProgressBarModule = (function () {
         var $value = getProgressBarCurrentValue();
         var $newValue = $value + $amount;
 
-        checkStatus($newValue);
+
         $pb.attr('data-transitiongoal', $newValue).progressbar({display_text: 'center'});
+        checkStatus($newValue);
 
     };
 
@@ -73,8 +74,10 @@ var ProgressBarModule = (function () {
     var decreaseProgressBar = function($amount){
         var $value = getProgressBarCurrentValue();
         var $newValue = $value - $amount;
-        checkStatus($newValue);
+        $newValue = ($newValue < 0) ? 0 : $newValue;
+
         $pb.attr('data-transitiongoal', $newValue).progressbar({display_text: 'center'});
+        checkStatus($newValue);
     }
 
     return {
@@ -151,8 +154,16 @@ $(document).ready(function () {
 
 
 
-    var progressbar = $('.progress .progress-bar')
+    var progressbar = $('#progress1 .progress-bar')
     ProgressBarModule.init(progressbar);
+
+    $(".btn-group .dropdown-menu").on('click', 'a', function(){
+        var index = $(this).parents('li').index();
+        var progressbar = '#progress' + ++index  + ' .progress-bar';
+        ProgressBarModule.setPB($(progressbar));
+    });
+
+
 //    ProgressBarModule.setProgressBar();
 
     $(".container").on('click', '#trigger-minus-10', function(){
