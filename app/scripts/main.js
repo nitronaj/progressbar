@@ -112,47 +112,6 @@ var ProgressBarModule = (function () {
 
 
 $(document).ready(function () {
-   /* var $pb = $('.progress .progress-bar');
-
-
-    var $pb1 = $('.progress .progress-bar-success');
-    var $pb2 = $('.progress .progress-bar-warning');
-    var $pb3 = $('.progress .progress-bar-danger');
-
-    $('#trigger-0').click(function () {
-        $pb.attr('data-transitiongoal', 0).progressbar({display_text: 'center'});
-    });
-    $('#trigger-50').click(function () {
-        $pb.attr('data-transitiongoal', 50).progressbar({display_text: 'center'});
-    });
-    $('#trigger-100').click(function () {
-        $pb.attr('data-transitiongoal', 100).progressbar({display_text: 'center'});
-    });
-
-    var normal = 0;
-    var warning = 0;
-    var danger = 0;
-
-
-    $('#trigger-1').click(function () {
-        var oldAttr;
-        oldAttr = $pb1.attr('data-transitiongoal') || 0;
-        oldAttr = Math.ceil(oldAttr);
-        if (oldAttr < 80) {
-            normal += 10;
-            $pb1.attr('data-transitiongoal', normal).progressbar({display_text: 'center'});
-        } else if (oldAttr >= 80 && oldAttr < 95) {
-            warning += 5;
-            $pb2.attr('data-transitiongoal', warning).progressbar({display_text: 'center'});
-        } else {
-            danger += 1;
-            $pb3.attr('data-transitiongoal', danger).progressbar({display_text: 'center'});
-        }
-    });*/
-
-
-
-
 
     var progressbar = $('#progress1 .progress-bar')
     ProgressBarModule.init(progressbar);
@@ -163,22 +122,21 @@ $(document).ready(function () {
         ProgressBarModule.setPB($(progressbar));
     });
 
+    var $container = $(".container-fluid");
 
-//    ProgressBarModule.setProgressBar();
-
-    $(".container").on('click', '#trigger-minus-10', function(){
+    $container.on('click', '#trigger-minus-10', function(){
         ProgressBarModule.decrease(10);
     });
 
-    $(".container").on('click', '#trigger-minus-25', function(){
+    $container.on('click', '#trigger-minus-25', function(){
         ProgressBarModule.decrease(25);
     });
 
-    $(".container").on('click', '#trigger-plus-10', function(){
+    $container.on('click', '#trigger-plus-10', function(){
         ProgressBarModule.increase(10);
     });
 
-    $(".container").on('click', '#trigger-plus-25', function(){
+    $container.on('click', '#trigger-plus-25', function(){
         ProgressBarModule.increase(25);
     });
 });
